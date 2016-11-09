@@ -1,5 +1,5 @@
-// I180: Contractor receives multiple single-source/non-competitive contracts from a single procuring entity during a defined time period
-
+const fs = require('fs');
+const path = require('path');
 const moment = require('moment');
 const {
   createCollectionIndicator,
@@ -50,6 +50,8 @@ const testFunction = (collection, options = {}) => {
 };
 
 const i180 = createCollectionIndicator('i180', testFunction, {
+  shortDesc: 'Contractor receives multiple single-source/non-competitive contracts from a single procuring entity during a defined time period',
+  docs: fs.readFileSync(path.join(__dirname, 'i180.md')).toString(),
   requiredOCDSFields: [
     'ocid',
     'awards.status',

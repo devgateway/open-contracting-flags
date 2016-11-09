@@ -18,7 +18,13 @@ const typecheckResult = (result, indicatorId) => {
 
 const createIndicator = (indicatorId, testFunction, options = {}) => {
 
-  const { preconditions, requiredOCDSFields, requiredCustomFields } = Object.assign({}, DEFAULT_OPTIONS, options);
+  const {
+    shortDesc,
+    docs,
+    preconditions,
+    requiredOCDSFields,
+    requiredCustomFields
+  } = Object.assign({}, DEFAULT_OPTIONS, options);
 
   const indicatorFunction = (release, testFunctionOptions) => {
 
@@ -56,6 +62,8 @@ const createIndicator = (indicatorId, testFunction, options = {}) => {
   indicatorFunction.selfDocument = () => ({
     id: indicatorId,
     type: indicatorFunction.type,
+    shortDesc,
+    docs,
     requiredOCDSFields,
     requiredCustomFields,
     preconditions: preconditions.map(p => p.selfDocument())

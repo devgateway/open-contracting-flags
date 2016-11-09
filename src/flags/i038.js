@@ -1,5 +1,5 @@
-// Indicator 038: Allowing an unreasonable short time to respond to requests
-
+const path = require('path');
+const fs = require('fs');
 const { createIndicator } = require('../util');
 
 const testFunction = (release, options) => {
@@ -10,6 +10,8 @@ const testFunction = (release, options) => {
 };
 
 const i038 = createIndicator('i038', testFunction, {
+  shortDesc: 'Allowing an unreasonable short time to respond to requests',
+  docs: fs.readFileSync(path.join(__dirname, 'i038.md')).toString(),
   preconditions: [],
   requiredOCDSFields: [
     'tender.tenderPeriod.startDate',

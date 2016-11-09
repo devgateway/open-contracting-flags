@@ -15,8 +15,8 @@ test('i007 should return false when there are multiple suppliers', assert => {
   assert.plan(2);
   const release = {
     awards: [
-      { suppliers: [ { id: '123' }], status: 'active' },
-      { suppliers: [ { id: 'abc' }], status: 'unsuccessful' }
+      { suppliers: [ { _id: '123' }], status: 'active' },
+      { suppliers: [ { _id: 'abc' }], status: 'unsuccessful' }
     ]
   };
   const releaseString = JSON.stringify(release);
@@ -28,7 +28,7 @@ test('i007 should return true when there is only one supplier', assert => {
   assert.plan(2);
   const release = {
     awards: [
-      { suppliers: [ { id: '123' }], status: 'active' }
+      { suppliers: [ { _id: '123' }], status: 'active' }
     ]
   };
   const releaseString = JSON.stringify(release);
@@ -40,8 +40,8 @@ test('i007 should return true if only one supplier submits mutiple bids', assert
   assert.plan(2);
   const release = {
     awards: [
-      { suppliers: [ { id: '123' }], status: 'active' },
-      { suppliers: [ { id: '123' }], status: 'unsuccessful' }
+      { suppliers: [ { _id: '123' }], status: 'active' },
+      { suppliers: [ { _id: '123' }], status: 'unsuccessful' }
     ]
   };
   const releaseString = JSON.stringify(release);
@@ -54,7 +54,7 @@ test.skip('i007 should return true if there are multiple suppliers but only one 
   assert.plan(2);
   const release = {
     awards: [
-      { suppliers: [ { id: '123' }, { ids: 'abc' } ]}
+      { suppliers: [ { _id: '123' }, { _id: 'abc' } ]}
     ]
   };
   const releaseString = JSON.stringify(release);

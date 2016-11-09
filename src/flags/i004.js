@@ -1,6 +1,7 @@
-// I004: Multiple sole source awards above or just below the sole source limit
 // TODO: clean up all of this code
 
+const fs = require('fs');
+const path = require('path');
 const { createCollectionIndicator } = require('../util');
 const { hasAward, isLimited } = require('../preconditions');
 
@@ -50,6 +51,8 @@ const testFunction = (collection, options) => {
 };
 
 const i004 = createCollectionIndicator('i004', testFunction, {
+  shortDesc: 'Multiple sole source awards above or just below the sole source limit',
+  docs: fs.readFileSync(path.join(__dirname, 'i004.md')).toString(),
   requiredOCDSFields: [
     'ocid',
     'awards.status',

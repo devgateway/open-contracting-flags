@@ -35,7 +35,13 @@ const typecheckResult = (result, expectedLength, indicatorId) => {
 
 const createCollectionIndicator = (indicatorId, testFunction, options = {}) => {
 
-  const { filters, requiredOCDSFields, requiredCustomFields } = Object.assign({}, DEFAULT_OPTIONS, options);
+  const {
+    shortDesc,
+    docs,
+    filters,
+    requiredOCDSFields,
+    requiredCustomFields
+  } = Object.assign({}, DEFAULT_OPTIONS, options);
   const requiredFields = requiredOCDSFields.concat(requiredCustomFields);
 
   const indicatorFunction = (collection, testFunctionOptions) => {
@@ -72,6 +78,8 @@ const createCollectionIndicator = (indicatorId, testFunction, options = {}) => {
   indicatorFunction.selfDocument = () => ({
     id: indicatorId,
     type: indicatorFunction.type,
+    shortDesc,
+    docs,
     requiredOCDSFields,
     requiredCustomFields,
     filters: filters.map(f => f.selfDocument())

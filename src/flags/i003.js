@@ -1,5 +1,5 @@
-// Indicator 003: Only winning bidder was eligible
-
+const path = require('path');
+const fs = require('fs');
 const { createIndicator } = require('../util');
 const { hasAward } = require('../preconditions');
 
@@ -16,6 +16,8 @@ const testFunction = release => {
 };
 
 const i003 = createIndicator('i003', testFunction, {
+  shortDesc: 'Only winning bidder was eligible',
+  docs: fs.readFileSync(path.join(__dirname, 'i003.md')).toString(),
   preconditions: [ hasAward ],
   requiredOCDSFields: [ 'awards.status' ],
   requiredCustomFields: [ 'awards.inelibigleYN' ]

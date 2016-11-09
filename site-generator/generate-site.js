@@ -8,7 +8,9 @@ const indexTemplate = require('./templates/index.js');
 const indexPath = path.join(__dirname, '..', 'static');
 const versionPath = path.join(indexPath, 'versions');
 
-const indicators = Object.keys(flags).map(flagId => flags[flagId].selfDocument());
+const indicators = Object.keys(flags)
+  .sort()
+  .map(flagId => flags[flagId].selfDocument());
 
 const versionPage = versionTemplate({ version, indicators });
 
