@@ -1,6 +1,6 @@
 {
   "name": "ocds-red-flag-calculations",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Formulas for calculating corruption red-flags for OCDS JSON data",
   "scripts": {
     "coverage": "istanbul cover npm test",

@@ -45,15 +45,17 @@ const testFunction = collection => {
 
 };
 
-const i803 = createCollectionIndicator('i083', testFunction, {
+const i083 = createCollectionIndicator('i083', testFunction, {
   shortDesc: 'The same companies always bid, the same companies always win and the same companies always lose',
   docs: fs.readFileSync(path.join(__dirname, 'i083.md')).toString(),
-  requiredOCDSFields: [ 'ocid' ],
-  requiredCustomFields: [
-    'awards.suppliers._id',
+  requiredOCDSFields: [
+    'ocid',
     'awards.status'
+  ],
+  requiredCustomFields: [
+    'awards.suppliers._id'
   ],
   filters: [ hasAward, hasLosingBid ]
 });
 
-module.exports = i803;
+module.exports = i083;

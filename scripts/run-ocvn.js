@@ -24,6 +24,7 @@ let collectionFlagResults;
 const INDICATOR_OPTIONS = {
   i004: { threshold: 0.05, soleSourceLimit: 5000000000 },
   i038: { threshold: 7 },
+  i077: { maxAwards: 3, timePeriod: 365 },
   i171: { threshold: 0.01 },
   i180: { threshold: 365 * 3 }
 };
