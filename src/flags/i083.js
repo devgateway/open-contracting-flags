@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const Immutable = require('immutable');
 const { createCollectionIndicator } = require('../util');
-const { hasAward, hasLosingBid } = require('../preconditions');
+const { hasAward, hasLosingBid, isOpen } = require('../preconditions');
 
 const testFunction = collection => {
 
@@ -46,7 +46,7 @@ const testFunction = collection => {
 };
 
 const i083 = createCollectionIndicator('i083', testFunction, {
-  shortDesc: 'The same companies always bid, the same companies always win and the same companies always lose',
+  shortDesc: 'When X supplier wins, same tenderers always lose (this could be linked to a certain PE)',
   docs: fs.readFileSync(path.join(__dirname, 'i083.md')).toString(),
   requiredOCDSFields: [
     'ocid',
@@ -55,7 +55,7 @@ const i083 = createCollectionIndicator('i083', testFunction, {
   requiredCustomFields: [
     'awards.suppliers._id'
   ],
-  filters: [ hasAward, hasLosingBid ]
+  filters: [ hasAward, hasLosingBid, isOpen ]
 });
 
 module.exports = i083;

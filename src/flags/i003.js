@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const { createIndicator } = require('../util');
-const { hasAward } = require('../preconditions');
+const { hasAward, hasLosingBid, isOpen } = require('../preconditions');
 
 const testFunction = release => {
 
@@ -18,7 +18,7 @@ const testFunction = release => {
 const i003 = createIndicator('i003', testFunction, {
   shortDesc: 'Only winning bidder was eligible',
   docs: fs.readFileSync(path.join(__dirname, 'i003.md')).toString(),
-  preconditions: [ hasAward ],
+  preconditions: [ hasAward, hasLosingBid, isOpen ],
   requiredOCDSFields: [ 'awards.status' ],
   requiredCustomFields: [ 'awards.inelibigleYN' ]
 });

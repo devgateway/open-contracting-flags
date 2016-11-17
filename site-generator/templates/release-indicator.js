@@ -12,7 +12,7 @@ const template = details => `
     <h4>Preconditions</h4>
     <ul class="preconditions">
       ${details.preconditions.length > 0 ? 
-        details.preconditions.map(({ name }) => `<li>${name}</li>`) : 
+        details.preconditions.map(({ name }) => `<li>${name}</li>`).join('\n') : 
         'None'
       }
     </ul>

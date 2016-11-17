@@ -28,6 +28,7 @@ const testFunction = (collection, options) => {
   // create a list of all suppliers who have multiple problematic sole source awards
   const riskySuppliers = Object.keys(flaggedBySupplier).filter(key => flaggedBySupplier[key] > 1);
 
+  // TODO: we should only flag the sole-source contracts within the threshold
   // return true for any release that features a winning supplier who is on the naughty list
   const result = collection.reduce(
     (resultByRelease, release) => {

@@ -7,5 +7,6 @@ module.exports = {
   i083: require('./i083.js'),
   i085: require('./i085.js'),
   i171: require('./i171.js'),
+  i172: require('./i172.js'),
   i180: require('./i180.js')
 };

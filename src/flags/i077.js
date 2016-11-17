@@ -76,7 +76,7 @@ const testFunction = (collection, options) => {
 
 const i077 = createCollectionIndicator('i077', testFunction, {
   shortDesc: 'High number of contract awards to one bidder',
-  docs: fs.readFileSync(path.join(__dirname, 'i077.md')),
+  docs: fs.readFileSync(path.join(__dirname, 'i077.md')).toString(),
   requiredOCDSFields: [
     'ocid',
     'awards.date',

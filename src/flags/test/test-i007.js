@@ -4,6 +4,7 @@ const i007 = require('../i007.js');
 test('i007 should return null when there are no suppliers', assert => {
   assert.plan(2);
   const release = {
+    tender: { procurementMethod: 'open' },
     awards: []
   };
   const releaseString = JSON.stringify(release);
@@ -14,6 +15,7 @@ test('i007 should return null when there are no suppliers', assert => {
 test('i007 should return false when there are multiple suppliers', assert => {
   assert.plan(2);
   const release = {
+    tender: { procurementMethod: 'open' },
     awards: [
       { suppliers: [ { _id: '123' }], status: 'active' },
       { suppliers: [ { _id: 'abc' }], status: 'unsuccessful' }
@@ -27,6 +29,7 @@ test('i007 should return false when there are multiple suppliers', assert => {
 test('i007 should return true when there is only one supplier', assert => {
   assert.plan(2);
   const release = {
+    tender: { procurementMethod: 'open' },
     awards: [
       { suppliers: [ { _id: '123' }], status: 'active' }
     ]
@@ -39,6 +42,7 @@ test('i007 should return true when there is only one supplier', assert => {
 test('i007 should return true if only one supplier submits mutiple bids', assert => {
   assert.plan(2);
   const release = {
+    tender: { procurementMethod: 'open' },
     awards: [
       { suppliers: [ { _id: '123' }], status: 'active' },
       { suppliers: [ { _id: '123' }], status: 'unsuccessful' }
@@ -53,6 +57,7 @@ test('i007 should return true if only one supplier submits mutiple bids', assert
 test.skip('i007 should return true if there are multiple suppliers but only one bid', assert => {
   assert.plan(2);
   const release = {
+    tender: { procurementMethod: 'open' },
     awards: [
       { suppliers: [ { _id: '123' }, { _id: 'abc' } ]}
     ]

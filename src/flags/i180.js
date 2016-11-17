@@ -59,7 +59,6 @@ const i180 = createCollectionIndicator('i180', testFunction, {
     'tender.procurementMethod'
   ],
   requiredCustomFields: [
-    // TODO: should be .id (http://standard.open-contracting.org/latest/en/schema/release/#id1)
     'tender.procuringEntity.identifier._id',
     'awards.suppliers._id'
   ],

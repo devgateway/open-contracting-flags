@@ -1,9 +1,7 @@
-// The same companies always bid, the same companies always win and the same companies always lose
-
 const test = require('tape');
-const i083 = require('../i083.js');
+const i172 = require('../i172.js');
 
-test('i083 should return false for no pattern of collusion', assert => {
+test('i172 returns false when no pattern of repeated suppliers exists', assert => {
   assert.plan(1);
   const collection = [
     {
@@ -21,22 +19,14 @@ test('i083 should return false for no pattern of collusion', assert => {
         { status: 'active', suppliers: [ { _id: 'supplierOne' } ] },
         { status: 'unsuccessful', suppliers: [ { _id: 'supplierThree' } ] }
       ]
-    },
-    {
-      ocid: 'releaseThree',
-      tender: { procurementMethod: 'open' },
-      awards: []
     }
   ];
-  const expectedResult = {
-    releaseOne: false,
-    releaseTwo: false
-  };
-  const result = i083(collection);
+  const expectedResult = { releaseOne: false, releaseTwo: false };
+  const result = i172(collection);
   assert.deepEqual(result, expectedResult);
 });
 
-test('i083 should flag patterns of collusion', assert => {
+test('i172 flags suppliers appearing repeatedly in bids', assert => {
   assert.plan(1);
   const collection = [
     {
@@ -51,16 +41,16 @@ test('i083 should flag patterns of collusion', assert => {
       ocid: 'releaseTwo',
       tender: { procurementMethod: 'open' },
       awards: [
-        { status: 'active', suppliers: [ { _id: 'supplierOne' } ] },
-        { status: 'unsuccessful', suppliers: [ { _id: 'supplierTwo' } ] }
+        { status: 'active', suppliers: [ { _id: 'supplierTwo' } ] },
+        { status: 'unsuccessful', suppliers: [ { _id: 'supplierOne' } ] }
       ]
     },
     {
       ocid: 'releaseThree',
       tender: { procurementMethod: 'open' },
       awards: [
-        { status: 'active', suppliers: [ { _id: 'supplierThree' } ] },
-        { status: 'unsuccessful', suppliers: [ { _id: 'supplierOne' } ] }
+        { status: 'active', suppliers: [ { _id: 'supplierOne' } ] },
+        { status: 'unsuccessful', suppliers: [ { _id: 'supplierThree' } ] }
       ]
     }
   ];
@@ -69,7 +59,7 @@ test('i083 should flag patterns of collusion', assert => {
     releaseTwo: true,
     releaseThree: false
   };
-  const result = i083(collection);
+  const result = i172(collection);
   assert.deepEqual(result, expectedResult);
 });
 

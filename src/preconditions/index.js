@@ -1,5 +1,7 @@
 module.exports = {
   hasAward: require('./has-award.js'),
   hasLosingBid: require('./has-losing-bid.js'),
-  isLimited: require('./is-limited.js')
+  hasMultipleSuppliers: require('./has-multiple-suppliers.js'),
+  isLimited: require('./is-limited.js'),
+  isOpen: require('./is-open.js')
 };
