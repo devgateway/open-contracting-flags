@@ -45,7 +45,7 @@ const createIndicator = (indicatorId, testFunction, options = {}) => {
       // if a precondition isn't met return null (e.g. not applicable)
       if (!preconditions[i](release)) {
         if (process.env.NODE_ENV === 'testing' || process.env.NODE_ENV === 'development') {
-          console.warn(`${indicatorId} failed precondition ${preconditions[i].name}`);
+          console.warn(`${indicatorId} failed precondition ${preconditions[i].selfDocument().name}`);
         }
         return null;
       }

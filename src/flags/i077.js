@@ -75,7 +75,7 @@ const testFunction = (collection, options) => {
 };
 
 const i077 = createCollectionIndicator('i077', testFunction, {
-  shortDesc: 'High number of contract awards to one bidder',
+  shortDesc: 'High number of contract awards to one supplier within a given time period by a single procurement entity',
   docs: fs.readFileSync(path.join(__dirname, 'i077.md')).toString(),
   requiredOCDSFields: [
     'ocid',

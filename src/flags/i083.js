@@ -46,7 +46,7 @@ const testFunction = collection => {
 };
 
 const i083 = createCollectionIndicator('i083', testFunction, {
-  shortDesc: 'When X supplier wins, same tenderers always lose (this could be linked to a certain PE)',
+  shortDesc: 'The same companies always bid, the same companies always win and the same companies always lose',
   docs: fs.readFileSync(path.join(__dirname, 'i083.md')).toString(),
   requiredOCDSFields: [
     'ocid',

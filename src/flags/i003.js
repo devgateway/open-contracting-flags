@@ -18,8 +18,15 @@ const testFunction = release => {
 const i003 = createIndicator('i003', testFunction, {
   shortDesc: 'Only winning bidder was eligible',
   docs: fs.readFileSync(path.join(__dirname, 'i003.md')).toString(),
-  preconditions: [ hasAward, hasLosingBid, isOpen ],
-  requiredOCDSFields: [ 'awards.status' ],
+  preconditions: [
+    hasAward,
+    hasLosingBid,
+    isOpen
+  ],
+  requiredOCDSFields: [
+    'tender.procurementMethod',
+    'awards.status'
+  ],
   requiredCustomFields: [ 'awards.inelibigleYN' ]
 });
 

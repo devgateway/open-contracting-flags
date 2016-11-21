@@ -37,6 +37,7 @@ const i171 = createIndicator('i171', testFunction, {
     'awards.status',
     'awards.value.amount',
     'awards.value.currency',
+    'tender.procurementMethod',
     'tender.value.amount',
     'tender.value.currency'
   ],

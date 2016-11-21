@@ -20,7 +20,7 @@ const records = data
   })
   .map(record => Object.keys(record)
     .reduce((typedRecord, flagId) => {
-      typedRecord[flagId] = record[flagId] === 'null' ? null : record[flagId] === 'true'
+      typedRecord[flagId] = record[flagId] === 'null' ? null : record[flagId] === 'true';
       return typedRecord;
     }, {})
   );

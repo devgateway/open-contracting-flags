@@ -7,7 +7,7 @@ const i038 = require('../i038.js');
 test('i038 should return null if there is not date information', assert => {
   assert.plan(2);
   const release = {
-    tender: {}
+    tender: { procurementMethod: null }
   };
   const releaseString = JSON.stringify(release);
   assert.strictEqual(i038(release), null);
@@ -18,6 +18,7 @@ test('i038 should return false if the date range is greater than the threshold',
   assert.plan(2);
   const release = {
     tender: {
+      procurementMethod: 'open',
       tenderPeriod: {
         startDate: new Date('2016-01-01'),
         endDate: new Date('2016-01-14')
@@ -34,6 +35,7 @@ test('i038 should return false if the date range is less than the threshold', as
   assert.plan(2);
   const release = {
     tender: {
+      procurementMethod: 'open',
       tenderPeriod: {
         startDate: new Date('2016-01-01'),
         endDate: new Date('2016-01-02')
@@ -52,6 +54,7 @@ test('i03 should return true if the date range is equal to the threshold', asser
   const startDate = new Date('2016-01-01');
   const release = {
     tender: {
+      procurementMethod: 'open',
       tenderPeriod: {
         startDate: startDate,
         endDate: moment(startDate).add(threshold, 'days').toDate()
