@@ -8,7 +8,7 @@ test('i083 should return false for no pattern of collusion', assert => {
   const collection = [
     {
       ocid: 'releaseOne',
-      tender: { procurementMethod: 'open' },
+      tender: { submissionMethod: [ 'electronicSubmission' ], procurementMethod: 'open' },
       awards: [
         { status: 'active', suppliers: [ { _id: 'supplierOne' } ] },
         { status: 'unsuccessful', suppliers: [ { _id: 'supplierTwo' } ] }
@@ -16,7 +16,7 @@ test('i083 should return false for no pattern of collusion', assert => {
     },
     {
       ocid: 'releaseTwo',
-      tender: { procurementMethod: 'open' },
+      tender: { submissionMethod: [ 'electronicSubmission' ], procurementMethod: 'open' },
       awards: [
         { status: 'active', suppliers: [ { _id: 'supplierOne' } ] },
         { status: 'unsuccessful', suppliers: [ { _id: 'supplierThree' } ] }
@@ -41,7 +41,7 @@ test('i083 should flag patterns of collusion', assert => {
   const collection = [
     {
       ocid: 'releaseOne',
-      tender: { procurementMethod: 'open' },
+      tender: { submissionMethod: [ 'electronicSubmission' ], procurementMethod: 'open' },
       awards: [
         { status: 'active', suppliers: [ { _id: 'supplierOne' } ] },
         { status: 'unsuccessful', suppliers: [ { _id: 'supplierTwo' } ] }
@@ -49,7 +49,7 @@ test('i083 should flag patterns of collusion', assert => {
     },
     {
       ocid: 'releaseTwo',
-      tender: { procurementMethod: 'open' },
+      tender: { submissionMethod: [ 'electronicSubmission' ], procurementMethod: 'open' },
       awards: [
         { status: 'active', suppliers: [ { _id: 'supplierOne' } ] },
         { status: 'unsuccessful', suppliers: [ { _id: 'supplierTwo' } ] }
@@ -57,7 +57,7 @@ test('i083 should flag patterns of collusion', assert => {
     },
     {
       ocid: 'releaseThree',
-      tender: { procurementMethod: 'open' },
+      tender: { submissionMethod: [ 'electronicSubmission' ], procurementMethod: 'open' },
       awards: [
         { status: 'active', suppliers: [ { _id: 'supplierThree' } ] },
         { status: 'unsuccessful', suppliers: [ { _id: 'supplierOne' } ] }

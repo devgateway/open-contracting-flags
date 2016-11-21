@@ -1,6 +1,9 @@
 function checkField(release, field) {
   let ref = release;
   const keys = field.split('.');
+  if (typeof release === 'string') {
+    return true;
+  }
   for (let i = 0; i < keys.length; i++) {
     ref = ref[keys[i]];
     if (typeof ref === 'undefined') {

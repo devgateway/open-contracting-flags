@@ -79,3 +79,30 @@ test('checkRequiredFields does not fail over empty arrays', assert => {
   const result = checkRequiredFields(record, [ 'award.value.amount' ]);
   assert.strictEqual(result, null);
 });
+
+test('checkRequiredFields does not fail over empty arrays (again)', assert => {
+  assert.plan(1);
+  const record = {
+    tender: { submissionMethod: [] }
+  };
+  const result = checkRequiredFields(record, [ 'tender.submissionMethod' ]);
+  assert.strictEqual(result, null);
+});
+
+test('regression test #1', assert => {
+  assert.plan(1);
+  const record = {
+    tender: {
+      procurementMethod: 'open',
+      submissionMethod: [ 'electronicSubmission' ],
+      value: { amount: 1000, currency: 'USD' }
+    },
+    awards: []
+  };
+  const result = checkRequiredFields(record, [
+    'tender.procurementMethod',
+    'tender.submissionMethod',
+    'tender.value.amount'
+  ]);
+  assert.strictEqual(result, null);
+});

@@ -6,6 +6,7 @@ const i085 = require('../i085.js');
 test('i085 returns null if there is no winning bidder', assert => {
   assert.plan(2);
   const release = {
+    tender: { submissionMethod: [ 'electronicSubmission' ] },
     awards: []
   };
   const releaseString = JSON.stringify(release);
@@ -16,6 +17,7 @@ test('i085 returns null if there is no winning bidder', assert => {
 test('i085 returns false if the only bid is the winning bidder', assert => {
   assert.plan(2);
   const release = {
+    tender: { submissionMethod: [ 'electronicSubmission' ] },
     awards: [
       { status: 'active', value: { amount: 1000, currency: 'USD' } }
     ]
@@ -28,6 +30,7 @@ test('i085 returns false if the only bid is the winning bidder', assert => {
 test('i085 returns false if there are multiple bids with an inexact difference', assert => {
   assert.plan(2);
   const release = {
+    tender: { submissionMethod: [ 'electronicSubmission' ] },
     awards: [
       { status: 'active', value: { amount: 1000, currency: 'USD' } },
       { status: 'unsuccessful', value: { amount: 1004, currency: 'USD' } } // 0.4% difference
@@ -41,6 +44,7 @@ test('i085 returns false if there are multiple bids with an inexact difference',
 test('i085 returns true if one losing bid is an exact percentage difference from the winner', assert => {
   assert.plan(2);
   const release = {
+    tender: { submissionMethod: [ 'electronicSubmission' ] },
     awards: [
       { status: 'active', value: { amount: 1000, currency: 'USD' } },
       { status: 'unsuccessful', value: { amount: 1100, currency: 'USD' } } // 10% difference
@@ -54,6 +58,7 @@ test('i085 returns true if one losing bid is an exact percentage difference from
 test('i085 returns true if one losing bid is exactly different, even if other bids are not', assert => {
   assert.plan(2);
   const release = {
+    tender: { submissionMethod: [ 'electronicSubmission' ] },
     awards: [
       { status: 'active', value: { amount: 1000, currency: 'USD' } },
       { status: 'unsuccessful', value: { amount: 1004, currency: 'USD' } }, // 0.4% difference
@@ -68,12 +73,14 @@ test('i085 returns true if one losing bid is exactly different, even if other bi
 test('i085 is not affected by the direction of the comparison', assert => {
   assert.plan(4);
   const release1 = {
+    tender: { submissionMethod: [ 'electronicSubmission' ] },
     awards: [
       { status: 'active', value: { amount: 1000, currency: 'USD' } },
       { status: 'unsuccessful', value: { amount: 1100, currency: 'USD' } }
     ]
   };
   const release2 = {
+    tender: { submissionMethod: [ 'electronicSubmission' ] },
     awards: [
       { status: 'active', value: { amount: 1100, currency: 'USD' } },
       { status: 'unsuccessful', value: { amount: 1000, currency: 'USD' } }
@@ -90,6 +97,7 @@ test('i085 is not affected by the direction of the comparison', assert => {
 test('i085 throws if bids are not in the same currency', assert => {
   assert.plan(2);
   const release = {
+    tender: { submissionMethod: [ 'electronicSubmission' ] },
     awards: [
       { status: 'active', value: { amount: 1000, currency: 'USD' } },
       { status: 'unsuccessful', value: { amount: 1100, currency: 'CAD' } }

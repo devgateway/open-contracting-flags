@@ -6,7 +6,7 @@ const i003 = require('../i003.js');
 test('i003 should return null if there are no winners', assert => {
   assert.plan(2);
   const release = {
-    tender: { procurementMethod: 'open' },
+    tender: { submissionMethod: [ 'electronicSubmission' ], procurementMethod: 'open' },
     awards: []
   };
   const releaseString = JSON.stringify(release);
@@ -17,7 +17,7 @@ test('i003 should return null if there are no winners', assert => {
 test('i003 should return false if there are multiple eligible bidders', assert => {
   assert.plan(2);
   const release = {
-    tender: { procurementMethod: 'open' },
+    tender: { submissionMethod: [ 'electronicSubmission' ], procurementMethod: 'open' },
     awards: [
       { id: 1, status: 'active', inelibigleYN: 'N' },
       { id: 2, status: 'unsuccessful', inelibigleYN: 'N' }
@@ -31,7 +31,7 @@ test('i003 should return false if there are multiple eligible bidders', assert =
 test('i003 should return null if there is no winning bidder', assert => {
   assert.plan(2);
   const release = {
-    tender: { procurementMethod: 'open' },
+    tender: { submissionMethod: [ 'electronicSubmission' ], procurementMethod: 'open' },
     awards: [
       { id: 1, status: 'unsuccessful', inelibigleYN: 'Y' },
       { id: 2, status: 'unsuccessful', inelibigleYN: 'Y' }
@@ -45,7 +45,7 @@ test('i003 should return null if there is no winning bidder', assert => {
 test('i003 should return null if there is only one bidder', assert => {
   assert.plan(2);
   const release = {
-    tender: { procurementMethod: 'open' },
+    tender: { submissionMethod: [ 'electronicSubmission' ], procurementMethod: 'open' },
     awards: [
       { status: 'active', inelibigleYN: 'N' }
     ]
@@ -58,7 +58,7 @@ test('i003 should return null if there is only one bidder', assert => {
 test('i003 should return true if there are multiple bidders but only winner is eligible', assert => {
   assert.plan(2);
   const release = {
-    tender: { procurementMethod: 'open' },
+    tender: { submissionMethod: [ 'electronicSubmission' ], procurementMethod: 'open' },
     awards: [
       { id: 1, status: 'active', inelibigleYN: 'N' },
       { id: 2, status: 'unsuccessful', inelibigleYN: 'Y' },

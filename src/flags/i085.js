@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { createIndicator, pricesExactlyDifferent } = require('../util');
-const { hasAward } = require('../preconditions');
+const { eBidding, hasAward } = require('../preconditions');
 
 const testFunction = release => {
 
@@ -32,8 +32,9 @@ const testFunction = release => {
 const i085 = createIndicator('i085', testFunction, {
   shortDesc: 'Bids are an exact percentage apart',
   docs: fs.readFileSync(path.join(__dirname, 'i085.md')).toString(),
-  preconditions: [ hasAward ],
+  preconditions: [ eBidding, hasAward ],
   requiredOCDSFields: [
+    'tender.submissionMethod',
     'awards.status',
     'awards.value.amount',
     'awards.value.currency'

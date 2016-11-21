@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { createIndicator } = require('../util');
-const { hasAward, isOpen } = require('../preconditions');
+const { eBidding, hasAward, isOpen } = require('../preconditions');
 
 const testFunction = (release, options) => {
 
@@ -32,11 +32,12 @@ const testFunction = (release, options) => {
 const i171 = createIndicator('i171', testFunction, {
   shortDesc: 'Bid is too close to budget, estimate or preferred solution',
   docs: fs.readFileSync(path.join(__dirname, 'i171.md')).toString(),
-  preconditions: [ hasAward, isOpen ],
+  preconditions: [ eBidding, hasAward, isOpen ],
   requiredOCDSFields: [
     'awards.status',
     'awards.value.amount',
     'awards.value.currency',
+    'tender.submissionMethod',
     'tender.procurementMethod',
     'tender.value.amount',
     'tender.value.currency'

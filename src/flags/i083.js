@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const Immutable = require('immutable');
 const { createCollectionIndicator } = require('../util');
-const { hasAward, hasLosingBid, isOpen } = require('../preconditions');
+const { eBidding, hasAward, hasLosingBid, isOpen } = require('../preconditions');
 
 const testFunction = collection => {
 
@@ -50,12 +50,13 @@ const i083 = createCollectionIndicator('i083', testFunction, {
   docs: fs.readFileSync(path.join(__dirname, 'i083.md')).toString(),
   requiredOCDSFields: [
     'ocid',
+    'tender.submissionMethod',
     'awards.status'
   ],
   requiredCustomFields: [
     'awards.suppliers._id'
   ],
-  filters: [ hasAward, hasLosingBid, isOpen ]
+  filters: [ eBidding, hasAward, hasLosingBid, isOpen ]
 });
 
 module.exports = i083;
