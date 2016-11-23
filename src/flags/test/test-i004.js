@@ -3,128 +3,28 @@
 const test = require('tape');
 const i004 = require('../i004.js');
 
-test('i004 should return null for an empty collection', assert => {
-  assert.plan(2);
-  const collection = [];
-  const collectionString = JSON.stringify(collection);
-  const result = i004(collection, { threshold: 0.05, soleSourceLimit: 1000 });
-  assert.strictEqual(result, null);
-  assert.strictEqual(JSON.stringify(collection), collectionString, 'not mutated');
-});
-
-test('i004 should return an empty object for a collection with no sole source awards', assert => {
-  assert.plan(2);
-  const collection = [
-    {
-      ocid: 'recordOne',
-      tender: { procurementMethod: 'open' },
-      awards: [
-        {
-          status: 'active',
-          value: { amount: 1000 },
-          suppliers: [ { _id: 'supplierOne' } ]
-        }
-      ]
-    }
-  ];
-  const collectionString = JSON.stringify(collection);
-  const result = i004(collection, { threshold: 0.05, soleSourceLimit: 1000 });
-  assert.strictEqual(result, null);
-  assert.strictEqual(JSON.stringify(collection), collectionString, 'not mutated');
-});
-
-test('i004 should with the correct object for a collection with one sole source awards', assert => {
-  assert.plan(2);
-  const collection = [
-    {
-      ocid: 'recordOne',
-      tender: { procurementMethod: 'limited' },
-      awards: [
-        {
-          status: 'active',
-          value: { amount: 1000 },
-          suppliers: [ { _id: 'supplierOne' } ]
-        }
-      ]
-    }
-  ];
-  const collectionString = JSON.stringify(collection);
-  const result = i004(collection, { threshold: 0.05, soleSourceLimit: 1000 });
-  assert.deepEqual(result, { recordOne: false });
-  assert.strictEqual(JSON.stringify(collection), collectionString, 'not mutated');
-});
-
-test('i004 should with the correct object for a collection with a supplier with multiple sole-source awards below the threshold', assert => {
-  assert.plan(2);
-  const collection = [
-    {
-      ocid: 'recordOne',
-      tender: { procurementMethod: 'limited' },
-      awards: [
-        {
-          status: 'active',
-          value: { amount: 20 },
-          suppliers: [ { _id: 'supplierOne' } ]
-        }
-      ]
+test('i004 should return false for an award below the sole-source threshold', assert => {
+  assert.plan(1);
+  const release = {
+    tender: {
+      procurementMethod: 'limited',
+      items: [ { classification: { _id: 1 } } ]
     },
-    {
-      ocid: 'recordTwo',
-      tender: { procurementMethod: 'limited' },
-      awards: [
-        {
-          status: 'active',
-          value: { amount: 20 },
-          suppliers: [ { _id: 'supplierOne' } ]
-        }
-      ]
-    }
-  ];
-  const collectionString = JSON.stringify(collection);
-  const result = i004(collection, { threshold: 0.05, soleSourceLimit: 1000 });
-  assert.deepEqual(result, { recordOne: false, recordTwo: false });
-  assert.strictEqual(JSON.stringify(collection), collectionString, 'not mutated');
+    awards: [ { status: 'active', value: { amount: 10 } } ]
+  };
+  const result = i004(release, { soleSourceLimits: { 1: 15 } });
+  assert.strictEqual(result, false);
 });
 
-test('i004 should with the correct object for a collection with a supplier with multiple sole-source awards at the threshold', assert => {
-  assert.plan(2);
-  const collection = [
-    {
-      ocid: 'recordOne',
-      tender: { procurementMethod: 'limited' },
-      awards: [
-        {
-          status: 'active',
-          value: { amount: 1000 },
-          suppliers: [ { _id: 'supplierOne' } ]
-        }
-      ]
+test('i004 should return true for an award above the sole-source threshold', assert => {
+  assert.plan(1);
+  const release = {
+    tender: {
+      procurementMethod: 'limited',
+      items: [ { classification: { _id: 1 } } ]
     },
-    {
-      ocid: 'recordTwo',
-      tender: { procurementMethod: 'limited' },
-      awards: [
-        {
-          status: 'active',
-          value: { amount: 1000 },
-          suppliers: [ { _id: 'supplierOne' } ]
-        }
-      ]
-    },
-    {
-      ocid: 'recordThree',
-      tender: { procurementMethod: 'limited' },
-      awards: [
-        {
-          status: 'active',
-          value: { amount: 1000 },
-          suppliers: [ { _id: 'supplierTwo' } ]
-        }
-      ]
-    }
-  ];
-  const collectionString = JSON.stringify(collection);
-  const result = i004(collection, { threshold: 0.05, soleSourceLimit: 1000 });
-  assert.deepEqual(result, { recordOne: true, recordTwo: true, recordThree: false });
-  assert.strictEqual(JSON.stringify(collection), collectionString, 'not mutated');
+    awards: [ { status: 'active', value: { amount: 20 } } ]
+  };
+  const result = i004(release, { soleSourceLimits: { 1: 15 } });
+  assert.strictEqual(result, true);
 });

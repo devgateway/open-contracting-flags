@@ -4,5 +4,6 @@ module.exports = {
   hasLosingBid: require('./has-losing-bid.js'),
   hasMultipleSuppliers: require('./has-multiple-suppliers.js'),
   isLimited: require('./is-limited.js'),
-  isOpen: require('./is-open.js')
+  isOpen: require('./is-open.js'),
+  knownClassification: require('./known-classification.js')
 };

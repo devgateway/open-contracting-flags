@@ -30,23 +30,14 @@ const records = data
     }, {})
   );
 
-const twoDecimals = num => Math.round(num * 10000) / 10000;
-
 flagIds.forEach(flagId => {
-  const flaggedRecords = records.filter(record => record[flagId]);
-  console.log(flagId, flaggedRecords.length);
-  console.log('-----------------');
-  const proportions = flagIds.map(fId => {
-    if (fId === flagId) {
-      return 'null';
-    } else {
-      const count = flaggedRecords.filter(record => record[fId]).length;
-      const proportion = twoDecimals(count / flaggedRecords.length);
-      return proportion;
-    }
-  });
-  console.log(flagIds.join('\t'));
-  console.log(proportions.join('\t'));
+  const flaggedTrue = records.filter(record => record[flagId] === true).length;
+  const flaggedFalse = records.filter(record => record[flagId] === false).length;
+  const flaggedNull = records.filter(record => record[flagId] === null).length;
+  console.log(flagId);
+  console.log('------------------');
+  console.log(['true', 'false', 'null'].join('\t'));
+  console.log([flaggedTrue, flaggedFalse, flaggedNull].join('\t'));
   console.log();
 });
 

@@ -21,8 +21,16 @@ const cleanup = (dbConnection, writeStream) =>
 
 let collectionFlagResults;
 
+// http://www.cipe.org/sites/default/files/publication-docs/TI-Report-Vietnam.pdf
 const INDICATOR_OPTIONS = {
-  i004: { threshold: 0.05, soleSourceLimit: 5000000000 },
+  i004: {
+    soleSourceLimits: {
+      1: 2000000000, // Goods (2 billion)
+      3: 5000000000, // Construction (5 billion)
+      5: 3000000000, // Services (3 billion)
+      10: 5000000000 // Construction (5 billion)
+    }
+  },
   i038: { threshold: 7 },
   i077: { maxAwards: 3, timePeriod: 365 },
   i171: { threshold: 0.01 },
