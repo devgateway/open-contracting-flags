@@ -16,7 +16,7 @@ The folder structure for the project is as follows:
 
 The `scripts/` folder holds ad-hoc scripts which are useful mainly during development/testing of the indicators. The most important script is `scripts/run-ocvn.js` which tests the current iteration of the flags against all of the Open Contracting Vietnam dataset and writes the result into the `output/` folder. To run this, configure the MongoDB connection in `config.js` and then run:
 
-    $ node scripts/run-ocvn.js
+    $ node --max_old_space_size=4096 scripts/run-ocvn.js
 
 Individual red flag functions are stored in `src/flags`. Each flag is created using the factory function exported by `/util/create-indicator.js` module. That factory function guarantees a consistent function signature between indicator functions, type-checks the release data against the OCDS Schema (when `NODE_ENV === 'testing'` or `NODE_ENV === 'development'` only), checks for required fields, and checks for preconditions. Creating a flag works as follows:
 
