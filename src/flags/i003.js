@@ -16,7 +16,7 @@ const testFunction = release => {
 };
 
 const i003 = createIndicator('i003', testFunction, {
-  shortDesc: 'Only winning bidder was eligible',
+  shortDesc: 'Only winning bidder was eligible for a tender with multiple bidders',
   docs: fs.readFileSync(path.join(__dirname, 'i003.md')).toString(),
   preconditions: [
     eBidding,
